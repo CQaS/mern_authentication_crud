@@ -1,8 +1,12 @@
 import express from 'express';
+import morgan from 'morgan';
+import routerAuth from './routes/auth.routes.js';
 
 const app = express();
 
-const PORT = 3000
-app.listen(PORT, () => {
-    console.log(`http://localhost:${PORT}`)
-});
+app.use(morgan('dev'))
+app.use(express.json())
+
+app.use('/api', routerAuth)
+
+export default app;
