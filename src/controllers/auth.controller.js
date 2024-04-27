@@ -58,11 +58,13 @@ export const login = async (req, res) => {
         const usuarioEncontrado = await User.findOne({
             email
         })
+
         if (!usuarioEncontrado) res.status(404).json({
             msg: 'Usuario no encontrado'
         })
 
-        const passwordDistinto = await passHash.compare(password, usuarioCreado.password)
+        const passwordDistinto = await passHash.compare(password, usuarioEncontrado.password)
+
         if (!passwordDistinto) res.status(404).json({
             msg: 'Password incorrecto'
         })

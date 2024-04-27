@@ -2,13 +2,13 @@ import mongoose from "mongoose";
 
 const taskSchema = new mongoose.Schema({
     titulo: {
-        type: 'string',
+        type: String,
         required: true,
         unique: true,
         trim: true,
     },
     descripcion: {
-        type: 'string',
+        type: String,
         required: true,
         trim: true,
         unique: true,
@@ -18,9 +18,9 @@ const taskSchema = new mongoose.Schema({
         default: Date.now,
     },
     user: {
-        typeof: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true,
+        type: mongoose.Types.ObjectId,
+        ref: "User",
+        require: true
     }
 }, {
     timestamps: true,

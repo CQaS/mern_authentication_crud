@@ -6,7 +6,7 @@ import {
 export const authRequerido = (req, res, next) => {
     const {
         token
-    } = req.cookie
+    } = req.cookies
     if (!token) return res.status(400).json({
         msg: 'no token'
     })
