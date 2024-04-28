@@ -2,9 +2,11 @@ npm create vite@latest
 nombre proyecto : cliente
 
 cd cliente
-npm install
-npm install -D tailwindcss postcss autoprefixer
+npm i
+npm i -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 npm i react-router-dom
+npm i react-hook-form
+npm i axios
 
 npm run dev
