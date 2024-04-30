@@ -16,6 +16,7 @@ import {
 import {
     registroSchema,
     loginSchema
+
 } from "../schemas/auth.schema.js";
 
 const routerAuth = Router();

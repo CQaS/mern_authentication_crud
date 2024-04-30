@@ -1,13 +1,19 @@
 import { useForm } from "react-hook-form";
-import { registroReq } from "../api/auth";
+import { useAuth } from "../context/AuthContex";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function RegistroPages() {
   const { register, handleSubmit } = useForm();
+  const { signup, esAutentico } = useAuth();
+  const navegar = useNavigate();
+
+  useEffect(() => {
+    if (esAutentico) navegar("/tasks");
+  }, [esAutentico]);
 
   const onSubmit = handleSubmit(async (values) => {
-    console.log(values);
-    const res = await registroReq(values);
-    console.log(res);
+    signup(values);
   });
 
   return (
