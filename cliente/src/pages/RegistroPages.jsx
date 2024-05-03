@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContex";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useEffect } from "react";
 
 function RegistroPages() {
@@ -51,6 +51,12 @@ function RegistroPages() {
         {errors.password && <p className="text-red-500">Password necesario!</p>}
         <button type="submit"> Registrar</button>
       </form>
+      <p className="flex gap-x-2 justify-between">
+        Ya tienes cuenta?{" "}
+        <Link to="/login" className="text-sky-500">
+          Ingresar
+        </Link>
+      </p>
     </div>
   );
 }

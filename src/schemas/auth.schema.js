@@ -25,7 +25,7 @@ export const loginSchema = z.object({
             required_error: "requirido Email"
         })
         .email({
-            message: "Invalid email"
+            message: "Eso no es un Email"
         }),
     password: z.string({
             required_error: "requirido Password"

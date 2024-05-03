@@ -75,18 +75,20 @@ export const login = async (req, res) => {
             msg: 'Password incorrecto'
         })
 
-        const token = await crearToken({
-            id: usuarioEncontrado.id
-        })
-        res.cookie("token", token)
+        if (usuarioEncontrado && passwordDistinto) {
+            const token = await crearToken({
+                id: usuarioEncontrado.id
+            })
+            res.cookie("token", token)
 
-        res.json({
-            id: usuarioEncontrado.id,
-            username: usuarioEncontrado.username,
-            email: usuarioEncontrado.email,
-            createdAt: usuarioEncontrado.createdAt,
-            updatedAt: usuarioEncontrado.updatedAt
-        })
+            res.json({
+                id: usuarioEncontrado.id,
+                username: usuarioEncontrado.username,
+                email: usuarioEncontrado.email,
+                createdAt: usuarioEncontrado.createdAt,
+                updatedAt: usuarioEncontrado.updatedAt
+            })
+        }
 
     } catch (error) {
         console.error(error)

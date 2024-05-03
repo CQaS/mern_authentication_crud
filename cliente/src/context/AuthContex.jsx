@@ -1,5 +1,11 @@
-import { Children, createContext, useState, useContext } from "react";
-import { registroReq } from "../api/auth";
+import {
+  Children,
+  createContext,
+  useState,
+  useContext,
+  useEffect,
+} from "react";
+import { registroReq, loginReq } from "../api/auth";
 
 export const AuthContext = createContext();
 
@@ -30,10 +36,33 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const signin = async (user) => {
+    try {
+      const res = await loginReq(user);
+      console.log(res);
+    } catch (E) {
+      console.log(E.response);
+      if (Array.isArray(E.response.data)) {
+        return setErr(E.response.data);
+      }
+      setErr([E.response.data.msg]);
+    }
+  };
+
+  useEffect(() => {
+    if (err.length > 0) {
+      const timer = setTimeout(() => {
+        setErr([]);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [err]);
+
   return (
     <AuthContext.Provider
       value={{
         signup,
+        signin,
         user,
         esAutentico,
         err,
