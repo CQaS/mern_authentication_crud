@@ -15,6 +15,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [esAutentico, setEsAutentico] = useState(false);
+  const [err, setErr] = useState([]);
 
   const signup = async (user) => {
     try {
@@ -23,8 +24,9 @@ export const AuthProvider = ({ children }) => {
       console.log(res.data);
       setUser(res.data);
       setEsAutentico(true);
-    } catch (error) {
-      console.log(error);
+    } catch (E) {
+      console.log(E.response);
+      setErr(E.response.data);
     }
   };
 
@@ -34,6 +36,7 @@ export const AuthProvider = ({ children }) => {
         signup,
         user,
         esAutentico,
+        err,
       }}
     >
       {children}

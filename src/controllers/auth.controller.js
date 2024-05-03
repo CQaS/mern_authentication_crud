@@ -15,6 +15,12 @@ export const registro = async (req, res) => {
 
 
     try {
+
+        const usuarioExiste = await User.findOne({
+            email
+        })
+        if (usuarioExiste) return res.status(400).json(['El usuario existe'])
+
         const passwordHash = await passHash.hash(password, 10)
         const nuevoUsuaro = new User({
             username,

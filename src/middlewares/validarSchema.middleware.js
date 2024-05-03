@@ -4,8 +4,6 @@ export const validarSchema = (schema) => (req, res, next) => {
         schema.parse(req.body)
         next()
     } catch (e) {
-        return res.status(400).json({
-            e: e.errors.map((ERR) => ERR.message)
-        })
+        return res.status(400).json(e.errors.map((ERR) => ERR.message))
     }
 }
