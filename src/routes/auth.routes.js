@@ -5,7 +5,8 @@ import {
     login,
     registro,
     logout,
-    profile
+    profile,
+    verificarToken
 } from "../controllers/auth.controller.js";
 import {
     authRequerido
@@ -25,5 +26,6 @@ routerAuth.post('/registro', validarSchema(registroSchema), registro)
 routerAuth.post('/login', validarSchema(loginSchema), login)
 routerAuth.post('/logout', logout)
 routerAuth.get('/profile', authRequerido, profile)
+routerAuth.get('/verificarToken', verificarToken)
 
 export default routerAuth

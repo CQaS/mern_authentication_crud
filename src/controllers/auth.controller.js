@@ -3,6 +3,10 @@ import passHash from 'bcryptjs'
 import {
     crearToken
 } from '../libs/jwt.js'
+import jwt from 'jsonwebtoken'
+import {
+    SECRET_KEY
+} from '../config.js'
 
 export const registro = async (req, res) => {
 
@@ -123,4 +127,38 @@ export const profile = async (req, res) => {
         updatedAt: userData.updatedAt
     })
 
+}
+
+export const verificarToken = async (req, res) => {
+    const {
+        token
+    } = req.cookies
+
+    if (!token) return res.status(401).json({
+        msg: 'No Utorizado'
+    })
+
+    jwt.verify(token, SECRET_KEY, async (err, user) => {
+        if (err) {
+            console.log('Token not found ERR')
+            return res.status(401).json({
+                msg: 'No Autorizado'
+            })
+        }
+
+        const userEncontrado = await User.findById(user.id)
+        if (!userEncontrado) {
+            console.log('user not found')
+            return res.status(401).json({
+                msg: 'No Autorizado'
+            })
+        }
+
+        return res.json({
+            id: userEncontrado._id,
+            usernane: userEncontrado.usernane,
+            email: userEncontrado.email
+        })
+
+    })
 }
