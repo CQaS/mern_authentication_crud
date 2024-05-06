@@ -7,25 +7,28 @@ import TaskFormPage from "./pages/TaskFormPage";
 import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/HomePage";
 import RutaProtegida from "./RutaProtegida";
+import { TasksProvider } from "./context/TasksContex";
 
 const App = () => {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPages />} />
-          <Route path="/registro" element={<RegistroPages />} />
+      <TasksProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPages />} />
+            <Route path="/registro" element={<RegistroPages />} />
 
-          {/* Rutas protegidas */}
-          <Route element={<RutaProtegida />}>
-            <Route path="/tasks" element={<TasksPage />} />
-            <Route path="/agregar-task" element={<TaskFormPage />} />
-            <Route path="/tasks/:id" element={<TaskFormPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+            {/* Rutas protegidas */}
+            <Route element={<RutaProtegida />}>
+              <Route path="/tasks" element={<TasksPage />} />
+              <Route path="/tasks/nueva" element={<TaskFormPage />} />
+              <Route path="/tasks/:id" element={<TaskFormPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </TasksProvider>
     </AuthProvider>
   );
 };

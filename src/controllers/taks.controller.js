@@ -16,6 +16,7 @@ export const getTask = async (req, res) => {
 }
 
 export const createTask = async (req, res) => {
+    console.log('body')
     console.log(req.body)
     const {
         titulo,
@@ -31,6 +32,7 @@ export const createTask = async (req, res) => {
     })
     const tareaGuardada = await nuevaTarea.save()
     res.json(tareaGuardada)
+
 }
 
 export const deleteTask = async (req, res) => {

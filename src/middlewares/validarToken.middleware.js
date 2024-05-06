@@ -17,6 +17,8 @@ export const authRequerido = (req, res, next) => {
         })
         req.user = user
 
+        console.log('token vaido')
+
         next();
     })
 }
