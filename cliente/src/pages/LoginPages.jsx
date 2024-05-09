@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContex";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function LoginPages() {
   const {
@@ -9,12 +10,17 @@ function LoginPages() {
     formState: { errors },
   } = useForm();
 
-  const { signin, err: signinErrores } = useAuth();
+  const { signin, err: signinErrores, esAutentico } = useAuth();
+  const navegar = useNavigate();
 
   const onSubmit = handleSubmit((data) => {
     console.log(data);
     signin(data);
   });
+
+  useEffect(() => {
+    if (esAutentico) navegar("/tasks");
+  }, [esAutentico]);
 
   return (
     <div className="felx h-[calc(100vh - 100px)] items-center justify-center">

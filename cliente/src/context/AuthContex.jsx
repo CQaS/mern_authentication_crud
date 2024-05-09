@@ -53,6 +53,12 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const logout = async (user) => {
+    Cookies.remove("token");
+    setEsAutentico(false);
+    setUser(null);
+  };
+
   useEffect(() => {
     if (err.length > 0) {
       const timer = setTimeout(() => {
@@ -96,6 +102,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         signup,
         signin,
+        logout,
         user,
         esAutentico,
         err,
