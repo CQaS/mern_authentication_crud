@@ -18,7 +18,7 @@ function Navbar() {
             </li>
             <li>
               <Link
-                to="/logout"
+                to="/"
                 onClick={() => {
                   logout();
                 }}
