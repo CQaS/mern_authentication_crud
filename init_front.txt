@@ -13,4 +13,4 @@ npm i js-cookie
 npm run dev
 
 
-VIDEO 4.01hs
+VIDEO 4.08hs
