@@ -1,4 +1,5 @@
 import { useTasks } from "../context/TasksContex";
+import { Link } from "react-router-dom";
 
 function TasksCard({ T }) {
   const { borrarTasks } = useTasks();
@@ -7,7 +8,7 @@ function TasksCard({ T }) {
       <header className="flex justify-between">
         <h1 className="text-2xl font-bold">{T.titulo}</h1>
         <div className="flex gap-x-2 items-center">
-          <button>Edit</button>
+          <Link to={`/tasks/${T._id}`}>Edit</Link>
           <button
             onClick={() => {
               borrarTasks(T._id);

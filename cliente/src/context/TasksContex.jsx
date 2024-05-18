@@ -1,5 +1,11 @@
 import { createContext, useContext, useState } from "react";
-import { borrarTasksReq, crearTasksReq, getTasksReq } from "../api/tasks";
+import {
+  borrarTasksReq,
+  crearTasksReq,
+  getTasksReq,
+  getTaskReq,
+  actualizarTasksReq,
+} from "../api/tasks";
 
 const TasksContext = createContext();
 
@@ -41,6 +47,24 @@ export function TasksProvider({ children }) {
     }
   };
 
+  const getTask = async (id) => {
+    try {
+      const res = await getTaskReq(id);
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const actualizarTasks = async (id, task) => {
+    try {
+      const res = await actualizarTasksReq(id, task);
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <TasksContext.Provider
       value={{
@@ -48,6 +72,8 @@ export function TasksProvider({ children }) {
         crearTasks,
         listarTasks,
         borrarTasks,
+        getTask,
+        actualizarTasks,
       }}
     >
       {children}
